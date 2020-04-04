@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="page-header">
+    <!-- <h1>Welcome Guest!!!</h1> -->
+    <div class="f-space-evenly">
+      <button class="btn" (click)="onLogin('vinguyen.fitsgu@gmail.com')">Login as Vix Nguyen</button>
+      <button class="btn" (click)="onLogin('guest@gmail.com')">Login as Anonymous</button>
+      <button class="btn" (click)="onLogout()">Logout</button>
+    </div>
+  </div>
+  <div class="page-main">
+    <h3 class="page-title">Which Writer do you like the best?</h3>
+    <ul class="member-list">
+      <li *ngFor="let item of members" class="member-item media">
+        <div class="media-img">
+          <img class="img-circle" src="{{item.avatar}}" alt="{{item.name}}">
+        </div>
+        <div class="media-body f-space-beetwen">
+          <div class="media-info">
+            <h5>{{item.name}}</h5>
+            <span class="des">{{item.posts}} published posts</span>
+          </div>
+          <div class="media-action">
+            <ng-template [isCurrentUser]="item.email">
+              <button * class="btn">Edit Profile</button>
+            </ng-template>
+            <ng-template isAuthenticated>
+              <button * class="btn" [disabled]="item.voted" (click)="onVote(item)">Vote</button>
+            </ng-template>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="page-footer"></div>
+</div>
