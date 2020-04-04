@@ -37,15 +37,18 @@ export class NgAuthenticationService {
     this.logger.next(false);
   }
 
-  signin(body: any) {
+  async signin(body: any) {
     const [url, queryParams] = this._constructRequest(this.moduleConfig.loginUri, body);
-    this.http.post(url, queryParams).subscribe(
+    let data: any = null;
+    await this.http.post(url, queryParams).toPromise().then(
       (res: any) => {
+        data = res;
         this.setToken(res);
-      }, (err) => {
+      }).catch((err) => {
         this.logger.next(err);
       }
     );
+    return data;
   }
 
   async signinPasswordless(params: any) {
@@ -92,8 +95,12 @@ export class NgAuthenticationService {
   }
 
   getUserInfo() {
-    const token = this.getToken();
-    return this.jwtHelper.decodeToken(token);
+    if (this.isAuthenticated()) {
+      const token = this.getToken();
+      return this.jwtHelper.decodeToken(token);
+    } else {
+      return null;
+    }
   }
 
   private _isTokenInvalid() {

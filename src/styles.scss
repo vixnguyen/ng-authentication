@@ -5,6 +5,9 @@ RESET
   margin: 0;
   padding: 0;
 }
+/*
+VARIABLES
+*/
 body {
   color: #444444;
   font-size: 16px;
@@ -44,13 +47,20 @@ STATE
 ELEMENT
 */
 .btn {
-  padding: 4px 8px;
+  padding: .25rem .5rem;
   border-radius: 4px;
   border: 1px solid #cccccc;
   background: none;
   cursor: pointer;
   &:focus {
     outline: 0;
+  }
+  &.btn-lg {
+    padding: .5rem .75rem;
+  }
+  &.btn-primary {
+    border-color: #37A000;
+    color: #37A000;
   }
 }
 .media {

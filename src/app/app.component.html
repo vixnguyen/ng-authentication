@@ -2,9 +2,9 @@
   <div class="page-header">
     <!-- <h1>Welcome Guest!!!</h1> -->
     <div class="f-space-evenly">
-      <button class="btn" (click)="onLogin('vinguyen.fitsgu@gmail.com')">Login as Vix Nguyen</button>
-      <button class="btn" (click)="onLogin('guest@gmail.com')">Login as Anonymous</button>
-      <button class="btn" (click)="onLogout()">Logout</button>
+      <button class="btn btn-lg" [class.btn-primary]="loggedInAs == 'vinguyen.fitsgu@gmail.com'" (click)="onLogin('vinguyen.fitsgu@gmail.com')">Login as Vix Nguyen</button>
+      <button class="btn btn-lg" [class.btn-primary]="loggedInAs == 'guest@gmail.com'" (click)="onLogin('guest@gmail.com')">Login as Anonymous</button>
+      <button class="btn btn-lg" (click)="onLogout()">Logout</button>
     </div>
   </div>
   <div class="page-main">
@@ -24,7 +24,7 @@
               <button * class="btn">Edit Profile</button>
             </ng-template>
             <ng-template isAuthenticated>
-              <button * class="btn" [disabled]="item.voted" (click)="onVote(item)">Vote</button>
+              <button * class="btn" [disabled]="item.voted[loggedInAs]" (click)="onVote(item)">Vote</button>
             </ng-template>
           </div>
         </div>
