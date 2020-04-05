@@ -4,14 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-export interface GolMapModuleConfig {
+export interface AuthModuleConfig {
   tokenGetter?: void;
   tokenName?: string;
   tokenDefault?: string;
   authProvider?: string;
   loginUri?: string;
 }
-export const AUTHENTICATION_MODULE_CONFIG = new InjectionToken<GolMapModuleConfig>('Authentication Configuration');
+export const AUTH_MODULE_CONFIG = new InjectionToken<AuthModuleConfig>('Authentication Configuration');
 
 const ACCESS_TOKEN = 'token';
 
@@ -20,21 +20,15 @@ const ACCESS_TOKEN = 'token';
 })
 export class NgAuthenticationService {
 
-  private moduleConfig: GolMapModuleConfig;
+  private moduleConfig: AuthModuleConfig;
   logger = new Subject<boolean>();
 
   constructor(
-    @Inject(AUTHENTICATION_MODULE_CONFIG) private readonly config: GolMapModuleConfig,
+    @Inject(AUTH_MODULE_CONFIG) private readonly config: AuthModuleConfig,
     private jwtHelper: JwtHelperService,
     private http: HttpClient
   ) {
     this.moduleConfig = config;
-  }
-
-  signout() {
-    const currentUser = this.getUserInfo();
-    localStorage.removeItem(ACCESS_TOKEN);
-    this.logger.next(false);
   }
 
   async signin(body: any) {
@@ -66,6 +60,11 @@ export class NgAuthenticationService {
     return data;
   }
 
+  signout() {
+    this.removeToken();
+    this.logger.next(false);
+  }
+
   setToken(data?: any) {
     if (data) {
       localStorage.setItem(ACCESS_TOKEN, data[ACCESS_TOKEN]);
@@ -77,43 +76,36 @@ export class NgAuthenticationService {
     return localStorage.getItem(ACCESS_TOKEN);
   }
 
+  removeToken() {
+    localStorage.removeItem(ACCESS_TOKEN);
+  }
+
   isAuthenticated() {
-    let isAuthenticated: boolean;
-    const token = this.getToken();
-    if (this._isTokenInvalid() && this.jwtHelper.isTokenExpired(token)) {
-      localStorage.removeItem(ACCESS_TOKEN);
-      isAuthenticated = false;
-    } else {
-      isAuthenticated = true;
-    }
-    return isAuthenticated;
+    const { isTokenValid } = this._verifyToken();
+    return isTokenValid;
   }
 
   isCurrentUser(uid: string) {
     const userInfo = this.getUserInfo();
-    return uid == userInfo.uid;
+    return userInfo ? uid === userInfo['uid'] : false;
   }
 
   getUserInfo() {
-    if (this.isAuthenticated()) {
-      const token = this.getToken();
+    const { isTokenValid, token } = this._verifyToken();
+    if (isTokenValid) {
       return this.jwtHelper.decodeToken(token);
     } else {
       return null;
     }
   }
 
-  private _isTokenInvalid() {
-    const token = this.getToken();
-    if (!token) {
-      return true;
-    } else {
-      const parts = token.split('.');
-      if (parts.length !== 3) {
-        return true;
-      }
+  private _verifyToken() {
+    const token: string | boolean = this.getToken();
+    const isTokenValid: boolean = !this.jwtHelper.isTokenExpired(token);
+    if (!isTokenValid) {
+      this.removeToken();
     }
-    return false;
+    return {isTokenValid, token};
   }
 
   private _constructRequest(uri: Array<any> | any, moreOptions?: object | any, fullRes?: boolean): any {

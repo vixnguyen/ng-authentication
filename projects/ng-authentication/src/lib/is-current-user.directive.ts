@@ -45,15 +45,13 @@ export class IsCurrentUserDirective implements OnInit, OnChanges, OnDestroy {
 
   private _reRenderer() {
     this.viewContainer.clear();
-    if (this.auth.isAuthenticated()) {
-      if (this.auth.isCurrentUser(this.isCurrentUser)) {
-        if (this.ifTpl) {
-          this.viewContainer.createEmbeddedView(this.ifTpl);
-        }
-      } else {
-        if (this.elseTpl) {
-          this.viewContainer.createEmbeddedView(this.elseTpl);
-        }
+    if (this.auth.isCurrentUser(this.isCurrentUser)) {
+      if (this.ifTpl) {
+        this.viewContainer.createEmbeddedView(this.ifTpl);
+      }
+    } else {
+      if (this.elseTpl) {
+        this.viewContainer.createEmbeddedView(this.elseTpl);
       }
     }
   }

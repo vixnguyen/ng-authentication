@@ -68,6 +68,9 @@ ELEMENT
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  .media-img {
+    display: flex;
+  }
   .media-body {
     flex-grow: 1;
     padding-left: 8px;

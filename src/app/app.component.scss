@@ -15,6 +15,9 @@ PAGE
   padding: 0.5rem;
   border-radius: 4px;
   box-sizing: border-box;
+  &:nth-child(2n) {
+    background-color: #f7f6f6;
+  }
 }
 .des {
   color: #8a8a8a;

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
-import { NgAuthenticationService, AUTHENTICATION_MODULE_CONFIG } from './ng-authentication.service';
+import { NgAuthenticationService, AUTH_MODULE_CONFIG } from './ng-authentication.service';
 import { IsAuthenticatedDirective } from './is-authenticated.directive';
 import { IsCurrentUserDirective } from './is-current-user.directive';
 
@@ -30,7 +30,7 @@ export class NgAuthenticationModule {
       providers: [
         NgAuthenticationService,
         {
-          provide: AUTHENTICATION_MODULE_CONFIG,
+          provide: AUTH_MODULE_CONFIG,
           useValue: config
         }
       ]
