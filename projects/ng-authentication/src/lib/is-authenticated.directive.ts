@@ -6,8 +6,8 @@ import {
   OnChanges,
   OnDestroy
 } from '@angular/core';
-import { NgAuthenticationService } from './ng-authentication.service';
 import { Subscription } from 'rxjs';
+import { NgAuthenticationService } from './ng-authentication.service';
 
 @Directive({
   selector: '[isAuthenticated]'
