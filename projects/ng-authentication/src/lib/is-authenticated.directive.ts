@@ -18,7 +18,7 @@ export class IsAuthenticatedDirective implements OnInit, OnChanges, OnDestroy {
 
   ifTpl: TemplateRef<any>;
   elseTpl: TemplateRef<any>;
-  subscription = new Subscription();
+  user$: Subscription;
 
   constructor(
     private tpl: TemplateRef<any>,
@@ -32,23 +32,23 @@ export class IsAuthenticatedDirective implements OnInit, OnChanges, OnDestroy {
     const nodes = this.viewContainer['_embeddedViews'][0]['nodes'];
     this.ifTpl = nodes[0] ? nodes[0]['template'] : null;
     this.elseTpl = nodes[1] ? nodes[1]['template'] : null;
-    this._reRenderer();
-    this.subscription.add(
-      this.auth.logger.subscribe(() => {
-        this._reRenderer();
-      })
-    );
+    this._createView();
+    this.user$ = this.auth.logger.subscribe(() => {
+      this._createView();
+    });
   }
 
   ngOnChanges() {
-    this._reRenderer();
+    this._createView();
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.user$) {
+      this.user$.unsubscribe();
+    }
   }
 
-  private _reRenderer() {
+  private _createView() {
     this.viewContainer.clear();
     if (this.auth.isAuthenticated()) {
       if (this.ifTpl) {
