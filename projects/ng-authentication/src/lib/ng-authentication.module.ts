@@ -6,14 +6,17 @@ import { NgAuthenticationService, AUTH_MODULE_CONFIG } from './ng-authentication
 import { IsAuthenticatedDirective } from './is-authenticated.directive';
 import { IsCurrentUserDirective } from './is-current-user.directive';
 
+const DIRECTIVES = [
+  IsAuthenticatedDirective,
+  IsCurrentUserDirective
+];
+
 @NgModule({
   declarations: [
-    IsAuthenticatedDirective,
-    IsCurrentUserDirective
+    ...DIRECTIVES
   ],
   exports: [
-    IsAuthenticatedDirective,
-    IsCurrentUserDirective
+    ...DIRECTIVES
   ],
   imports: [
     BrowserModule,
