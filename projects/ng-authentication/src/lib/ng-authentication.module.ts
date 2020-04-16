@@ -5,10 +5,13 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgAuthenticationService, AUTH_MODULE_CONFIG } from './ng-authentication.service';
 import { IsAuthenticatedDirective } from './is-authenticated.directive';
 import { IsCurrentUserDirective } from './is-current-user.directive';
+import { TestAuthenticatedDirective, caseExpectedDirective } from './test.directive';
 
 const DIRECTIVES = [
   IsAuthenticatedDirective,
-  IsCurrentUserDirective
+  IsCurrentUserDirective,
+  TestAuthenticatedDirective,
+  caseExpectedDirective
 ];
 
 @NgModule({

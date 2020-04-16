@@ -13,7 +13,7 @@ import { environment } from '../environments/environment';
     BrowserModule,
     NgAuthenticationModule.forRoot({
       authProvider: environment.authProvider,
-      loginUri: 'login'
+      loginUri: 'signInWithLink'
     })
   ],
   providers: [],

@@ -44,9 +44,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {}
 
-  onLogin(email: string) {
-    this.auth.signinPasswordless({email}).then(() => {
-      this.loggedInAs = email;
+  onLogin(uid: string) {
+    this.auth.signInWithLink({uid}).then(() => {
+      this.loggedInAs = uid;
     });
   }
   

@@ -31,7 +31,7 @@ export class NgAuthenticationService {
     this.moduleConfig = config;
   }
 
-  async signin(body: any) {
+  async signIn(body: any) {
     const [url, queryParams] = this._constructRequest(this.moduleConfig.loginUri, body);
     let data: any = null;
     await this.http.post(url, queryParams).toPromise().then(
@@ -45,7 +45,7 @@ export class NgAuthenticationService {
     return data;
   }
 
-  async signinPasswordless(params: any) {
+  async signInWithLink(params: any) {
     const [url, queryParams] = this._constructRequest(this.moduleConfig.loginUri, params);
     let data: any = null;
     await this.http.get(url, queryParams).toPromise().then(
