@@ -39,8 +39,8 @@ Run `npm i ng-authentication`
 
 
 ### Directives
-#### isAuthenticated
-Check & display content in case user is authenticated only
+#### 1. isAuthenticated
+1.1 Check & display content in case user is authenticated only
 ```html
 <!-- Shorthand -->
 <ng-template isAuthenticated>
@@ -54,7 +54,7 @@ Or
 </ng-template>
 ```
 
-Check & display content in both cases user is authenticated and not
+1.2 Check & display content in both cases user is authenticated and not
 ```html
 <ng-template isAuthenticated>
   <h1 * >Welcome user!</h1>
@@ -62,7 +62,7 @@ Check & display content in both cases user is authenticated and not
 </ng-template>
 ```
 
-Check & display content in case user is not authenticated only
+1.3 Check & display content in case user is not authenticated only
 ```html
 <ng-template isAuthenticated>
   <ng-template></ng-template>
@@ -70,8 +70,8 @@ Check & display content in case user is not authenticated only
 </ng-template>
 ```
 
-#### isCurrentUser
-Check & display content in case of right condition only
+#### 2. isCurrentUser
+2.1 Check & display content in case of right condition only
 ```html
 <!-- Shorthand -->
 <ng-template [isCurrentUser]="'vix'">
@@ -85,7 +85,7 @@ Or
 </ng-template>
 ```
 
-Check & display content in both cases right and wrong condition
+2.2 Check & display content in both cases right and wrong condition
 ```html
 <ng-template [isCurrentUser]="'vix'">
   <h1 * >It me ¯\_(ツ)_/¯</h1>
@@ -93,7 +93,7 @@ Check & display content in both cases right and wrong condition
 </ng-template>
 ```
 
-Check & display content in case of wrong condition
+2.3 Check & display content in case of wrong condition
 ```html
 <ng-template [isCurrentUser]="'vix'">
   <ng-template></ng-template> <!-- Define the right condition with empty content -->
@@ -101,8 +101,7 @@ Check & display content in case of wrong condition
 </ng-template>
 ```
 
-#### userRole
-Check & display content in case of right condition only
+#### 3. userRole
 ```html
 <!-- Shorthand -->
 <ng-template userRole>
@@ -111,7 +110,7 @@ Check & display content in case of right condition only
 ```
 
 ### Services
-Inject NgAuthenticationService into AppComponent (in case you want to use some method of this service)
+Inject NgAuthenticationService into AppComponent in case you want to use some methods of this service
 ```
 export class AppComponent {
 
