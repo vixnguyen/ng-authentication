@@ -20,12 +20,11 @@
             <span class="des">{{item.posts}} published posts</span>
           </div>
           <div class="media-action">
-            <!-- <ng-template [isCurrentUser]="item.email">
+            <ng-template [isCurrentUser]="item.email">
               <button * class="btn">Edit Profile</button>
-            </ng-template> -->
-            <ng-template testAuthenticated>
-              <button *caseExpected="false" class="btn" [disabled]="item.voted[loggedInAs]" (click)="onVote(item)">Unvote</button>
-              <button *caseExpected="true" class="btn" [disabled]="item.voted[loggedInAs]" (click)="onVote(item)">Vote</button>
+            </ng-template>
+            <ng-template isAuthenticated>
+              <button class="btn" [disabled]="item.voted[loggedInAs]" (click)="onVote(item)">Vote</button>
             </ng-template>
           </div>
         </div>

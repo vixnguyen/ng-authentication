@@ -1,10 +1,9 @@
 import {
   Directive,
   OnInit,
+  OnDestroy,
   TemplateRef,
-  ViewContainerRef,
-  OnChanges,
-  OnDestroy
+  ViewContainerRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgAuthenticationService } from './ng-authentication.service';
@@ -12,9 +11,7 @@ import { NgAuthenticationService } from './ng-authentication.service';
 @Directive({
   selector: '[isAuthenticated]'
 })
-
-
-export class IsAuthenticatedDirective implements OnInit, OnChanges, OnDestroy {
+export class IsAuthenticatedDirective implements OnInit, OnDestroy {
 
   ifTpl: TemplateRef<any>;
   elseTpl: TemplateRef<any>;
@@ -24,8 +21,7 @@ export class IsAuthenticatedDirective implements OnInit, OnChanges, OnDestroy {
     private tpl: TemplateRef<any>,
     private auth: NgAuthenticationService,
     private viewContainer: ViewContainerRef
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.viewContainer.createEmbeddedView(this.tpl);
@@ -36,10 +32,6 @@ export class IsAuthenticatedDirective implements OnInit, OnChanges, OnDestroy {
     this.user$ = this.auth.logger.subscribe(() => {
       this._createView();
     });
-  }
-
-  ngOnChanges() {
-    this._createView();
   }
 
   ngOnDestroy() {
@@ -53,6 +45,8 @@ export class IsAuthenticatedDirective implements OnInit, OnChanges, OnDestroy {
     if (this.auth.isAuthenticated()) {
       if (this.ifTpl) {
         this.viewContainer.createEmbeddedView(this.ifTpl);
+      } else if (!this.ifTpl && !this.elseTpl) {
+        this.viewContainer.createEmbeddedView(this.tpl);
       }
     } else {
       if (this.elseTpl) {

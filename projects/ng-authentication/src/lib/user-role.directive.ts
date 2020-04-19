@@ -1,38 +1,39 @@
 import {
   Directive,
-  Input,
   Host,
   OnInit,
-  AfterViewInit,
-  TemplateRef,
-  ViewContainerRef,
-  OnChanges,
   OnDestroy,
-  AfterViewChecked
+  Input,
+  TemplateRef,
+  ViewContainerRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgAuthenticationService } from './ng-authentication.service';
 
 @Directive({
-  selector: '[testAuthenticated]'
+  selector: '[userRole]'
 })
-export class TestAuthenticatedDirective implements OnInit {
+export class UserRoleDirective implements OnInit, OnDestroy {
 
   user$: Subscription;
-
 
   constructor(
     private tpl: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
     private auth: NgAuthenticationService
-  ) {
-  }
+  ) {}
   
   ngOnInit() {
     this.viewContainer.createEmbeddedView(this.tpl);
     this.user$ = this.auth.logger.subscribe(() => {
-      this._reRender();
+      this._initTpl();
     });
+  }
+
+  ngOnDestroy() {
+    if (this.user$) {
+      this.user$.unsubscribe();
+    }
   }
 
   addTpl(value: any, tpl: TemplateRef<any>) {
@@ -41,7 +42,7 @@ export class TestAuthenticatedDirective implements OnInit {
     }
   }
 
-  private _reRender() {
+  private _initTpl() {
     this.viewContainer.clear();
     this.viewContainer.createEmbeddedView(this.tpl);
   }
@@ -49,22 +50,21 @@ export class TestAuthenticatedDirective implements OnInit {
 }
 
 @Directive({
-  selector: '[caseExpected]',
-  providers: [TestAuthenticatedDirective]
+  selector: '[userRoleIs]',
+  providers: [UserRoleDirective]
 })
-export class caseExpectedDirective implements OnInit  {
+export class UserRoleIsDirective implements OnInit  {
 
-  @Input() caseExpected: boolean | string;
+  @Input() userRoleIs: boolean | string;
 
   constructor(
-    @Host() private wrapper: TestAuthenticatedDirective,
-    public viewContainer: ViewContainerRef,
+    @Host() private wrapper: UserRoleDirective,
+    viewContainer: ViewContainerRef,
     private tpl: TemplateRef<any>
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
-    this.wrapper.addTpl(this.caseExpected, this.tpl);
+    this.wrapper.addTpl(this.userRoleIs, this.tpl);
   }
 
 }

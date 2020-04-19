@@ -1,13 +1,19 @@
-import { Directive, Input, OnInit, TemplateRef, ViewContainerRef, OnChanges, OnDestroy } from '@angular/core';
+import {
+  Directive,
+  OnInit,
+  OnDestroy,
+  Input,
+  TemplateRef,
+  ViewContainerRef
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgAuthenticationService } from './ng-authentication.service';
+import { IsAuthenticatedDirective } from './is-authenticated.directive';
 
 @Directive({
   selector: '[isCurrentUser]'
 })
-
-
-export class IsCurrentUserDirective implements OnInit, OnChanges, OnDestroy {
+export class IsCurrentUserDirective implements OnInit, OnDestroy {
 
   @Input() isCurrentUser: string;
   isAuthentication: boolean;
@@ -33,10 +39,6 @@ export class IsCurrentUserDirective implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  ngOnChanges() {
-    this._createView();
-  }
-
   ngOnDestroy() {
     if (this.user$) {
       this.user$.unsubscribe();
@@ -48,6 +50,8 @@ export class IsCurrentUserDirective implements OnInit, OnChanges, OnDestroy {
     if (this.auth.isCurrentUser(this.isCurrentUser)) {
       if (this.ifTpl) {
         this.viewContainer.createEmbeddedView(this.ifTpl);
+      } else if (!this.ifTpl && !this.elseTpl) {
+        this.viewContainer.createEmbeddedView(this.tpl);
       }
     } else {
       if (this.elseTpl) {
