@@ -39,7 +39,7 @@ Run `npm i ng-authentication`
 
 
 ### Directives
-##### isAuthenticated
+#### isAuthenticated
 Check & display content in case user is authenticated only
 ```html
 <!-- Shorthand -->
@@ -70,7 +70,7 @@ Check & display content in case user is not authenticated only
 </ng-template>
 ```
 
-##### isCurrentUser
+#### isCurrentUser
 Check & display content in case of right condition only
 ```html
 <!-- Shorthand -->
@@ -101,15 +101,16 @@ Check & display content in case of wrong condition
 </ng-template>
 ```
 
-##### userRole
+#### userRole
 Check & display content in case of right condition only
 ```html
 <!-- Shorthand -->
 <ng-template userRole>
   <button [userRoleIs]="'admin'" class="btn">Remove</button>
 </ng-template>
+```
 
-#### Services
+### Services
 Inject NgAuthenticationService into AppComponent (in case you want to use some method of this service)
 ```
 export class AppComponent {
