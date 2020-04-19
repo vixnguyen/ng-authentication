@@ -3,10 +3,24 @@
 ## Install
 Run `npm i ng-authentication`
 
+## Built-in
+
+### Directives
+- isCurrentUser
+- isAuthenticated
+- userRole
+
+### Services
+- signInWithLink
+- signOut
+- isAuthenticated
+- isCurrentUser
+- getUserInfo
+
 ## Usage
 
-Import NgAuthentication to your AppModule
-```
+### Import NgAuthentication to your AppModule
+```TypeScript
 @NgModule({
   declarations: [
     AppComponent
@@ -14,7 +28,8 @@ Import NgAuthentication to your AppModule
   imports: [
     BrowserModule,
     NgAuthenticationModule.forRoot({
-      apiKey: 'Your Google Maps API key'
+      authProvider: environment.authProvider,
+      loginUri: 'signInWithLink'
     })
   ],
   providers: [],
@@ -22,31 +37,86 @@ Import NgAuthentication to your AppModule
 })
 ```
 
-Define options for your map
+
+### Directives
+##### isAuthenticated
+Check & display content in case user is authenticated only
+```html
+<!-- Shorthand -->
+<ng-template isAuthenticated>
+  <h1>Welcome user!</h1>
+</ng-template>
 ```
-this.mapOptions = {
-  center: '',
-  zoom: '',
-  olmap: {
-    ...
-  },
-  gmap: {
-    ...
-  }
+Or
+```html
+<ng-template isAuthenticated>
+  <h1 * >Welcome user!</h1>
+</ng-template>
+```
+
+Check & display content in both cases user is authenticated and not
+```html
+<ng-template isAuthenticated>
+  <h1 * >Welcome user!</h1>
+  <button * class="btn">Please sign in!</button>
+</ng-template>
+```
+
+Check & display content in case user is not authenticated only
+```html
+<ng-template isAuthenticated>
+  <ng-template></ng-template>
+  <button * class="btn">Please sign in!</button>
+</ng-template>
+```
+
+##### isCurrentUser
+Check & display content in case of right condition only
+```html
+<!-- Shorthand -->
+<ng-template [isCurrentUser]="'vix'">
+  <h1>It me ¯\_(ツ)_/¯</h1>
+</ng-template>
+```
+Or
+```html
+<ng-template [isCurrentUser]="'vix'">
+  <h1 * >It me ¯\_(ツ)_/¯</h1>
+</ng-template>
+```
+
+Check & display content in both cases right and wrong condition
+```html
+<ng-template [isCurrentUser]="'vix'">
+  <h1 * >It me ¯\_(ツ)_/¯</h1>
+  <button * class="btn">Who are you?</button>
+</ng-template>
+```
+
+Check & display content in case of wrong condition
+```html
+<ng-template [isCurrentUser]="'vix'">
+  <ng-template></ng-template> <!-- Define the right condition with empty content -->
+  <button * class="btn">Who are you?</button>
+</ng-template>
+```
+
+##### userRole
+Check & display content in case of right condition only
+```html
+<!-- Shorthand -->
+<ng-template userRole>
+  <button [userRoleIs]="'admin'" class="btn">Remove</button>
+</ng-template>
+
+#### Services
+Inject NgAuthenticationService into AppComponent (in case you want to use some method of this service)
+```
+export class AppComponent {
+
+  constructor(
+    @Inject(NgAuthenticationService) private auth: NgAuthenticationService
+  ) {}
+
 }
 ```
-
-Your template look like
-```
-<ng-authentication [options]="mapOptions"></ng-authentication>
-```
-
-## Built-in
-
-### Directive
-- isCurrentUser
-- isAuthenticated
-
-### Service
-- login
-

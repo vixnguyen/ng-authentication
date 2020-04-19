@@ -60,7 +60,7 @@ export class NgAuthenticationService {
     return data;
   }
 
-  signout() {
+  signOut() {
     this.removeToken();
     this.logger.next(false);
   }

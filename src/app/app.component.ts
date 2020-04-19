@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
   
   onLogout() {
-    this.auth.signout();
+    this.auth.signOut();
     this.loggedInAs = '';
   }
 
