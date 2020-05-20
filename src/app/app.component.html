@@ -24,9 +24,7 @@
             <ng-template [isCurrentUser]="item.email">
               <button * class="btn">My Profile</button>
             </ng-template>
-            <ng-template isAuthenticated>
-              <button class="btn" [disabled]="item.voted[loggedInAs]" (click)="onVote(item)">Vote</button>
-            </ng-template>
+            <button *isAuthenticated class="btn" [disabled]="item.voted[loggedInAs]" (click)="onVote(item)">Vote</button>
             <ng-template userRole>
               <button *userRoleIs="'admin'" class="btn" [disabled]="item.voted[loggedInAs]">Remove</button>
             </ng-template>

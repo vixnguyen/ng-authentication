@@ -11,10 +11,13 @@ Run `npm i ng-authentication`
 - userRole
 
 ### Services
+NgAuthenticationService
+##### Methods
 - signInWithLink
 - signOut
 - isAuthenticated
 - isCurrentUser
+- userRole
 - getUserInfo
 
 ## Usage
@@ -40,74 +43,75 @@ Run `npm i ng-authentication`
 
 ### Directives
 ##### isAuthenticated
-Check & display content in case user is authenticated only
+Display content in case user is authenticated
 ```html
-<!-- Shorthand -->
 <ng-template isAuthenticated>
   <h1>Welcome user!</h1>
 </ng-template>
 ```
 Or
 ```html
+<h1 *isAuthenticated >Welcome user!</h1>
+```
+
+Check if user is authenticated or not and then display content accordingly
+```html
 <ng-template isAuthenticated>
-  <h1 * >Welcome user!</h1>
+  <h1 * >Welcome user!</h1> <!-- This content will be displayed if user is authenticated -->
+  <button * class="btn">Please sign in!</button> <!-- This content will be displayed if not -->
 </ng-template>
 ```
 
-Check & display content in both cases user is authenticated and not
+Display content in case user is unauthenticated
 ```html
 <ng-template isAuthenticated>
-  <h1 * >Welcome user!</h1>
-  <button * class="btn">Please sign in!</button>
-</ng-template>
-```
-
-Check & display content in case user is not authenticated only
-```html
-<ng-template isAuthenticated>
-  <ng-template></ng-template>
+  <ng-template></ng-template> <!-- Trick: Define empty content for the right condition -->
   <button * class="btn">Please sign in!</button>
 </ng-template>
 ```
 
 ##### isCurrentUser
-Check & display content in case of right condition only
+Display content in case logger is current user
 ```html
-<!-- Shorthand -->
 <ng-template [isCurrentUser]="'vix'">
   <h1>It me ¯\_(ツ)_/¯</h1>
 </ng-template>
 ```
 Or
 ```html
+<h1 *isCurrentUser="'vix" >It me ¯\_(ツ)_/¯</h1>
+```
+
+Check if logger is current user or not and then display content accordingly
+```html
 <ng-template [isCurrentUser]="'vix'">
-  <h1 * >It me ¯\_(ツ)_/¯</h1>
+  <h1 * >It me ¯\_(ツ)_/¯</h1> <!-- This content will be displayed if logger is current user -->
+  <button * class="btn">Who are you?</button> <!-- This content will be displayed if not -->
 </ng-template>
 ```
 
-Check & display content in both cases right and wrong condition
+Display content in case current user is not logged in
 ```html
 <ng-template [isCurrentUser]="'vix'">
-  <h1 * >It me ¯\_(ツ)_/¯</h1>
-  <button * class="btn">Who are you?</button>
-</ng-template>
-```
-
-Check & display content in case of wrong condition
-```html
-<ng-template [isCurrentUser]="'vix'">
-  <ng-template></ng-template> <!-- Define the right condition with empty content -->
+  <ng-template></ng-template> <!-- Trick: Define empty content for the right condition -->
   <button * class="btn">Who are you?</button>
 </ng-template>
 ```
 
 ##### userRole
-Check & display content in case of right condition only
+Check & display based on user role (the same concepts with ngSwitchCase)
 ```html
-<!-- Shorthand -->
 <ng-template userRole>
-  <button [userRoleIs]="'admin'" class="btn">Remove</button>
+  <ng-template [userRoleIs]="'admin'">
+    <button class="btn">Remove</button>
+  </ng-template>
 </ng-template>
+```
+```html
+<ng-template userRole>
+  <button *userRoleIs="'admin'" class="btn">Remove</button>
+</ng-template>
+```
 
 #### Services
 Inject NgAuthenticationService into AppComponent (in case you want to use some method of this service)
