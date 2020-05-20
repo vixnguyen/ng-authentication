@@ -1,8 +1,5 @@
-# NgAuthentication
+# NgAuthJwt
 This package provides some utilities to deal with authentication features that are implemented based on JWT.
-
-## Install
-Run `npm i ng-auth-jwt`
 
 ## Built-in
 
@@ -43,8 +40,8 @@ NgAuthenticationService
 
 
 ### Directives
-##### isAuthenticated
-Display content in case user is authenticated
+#### 1. isAuthenticated
+##### 1.1. Display content in case user is authenticated
 ```html
 <ng-template isAuthenticated>
   <h1>Welcome user!</h1>
@@ -55,7 +52,7 @@ Or
 <h1 *isAuthenticated >Welcome user!</h1>
 ```
 
-Check if user is authenticated or not and then display content accordingly
+##### 1.2. Check if user is authenticated or not and then display content accordingly
 ```html
 <ng-template isAuthenticated>
   <h1 * >Welcome user!</h1> <!-- This content will be displayed if user is authenticated -->
@@ -63,7 +60,7 @@ Check if user is authenticated or not and then display content accordingly
 </ng-template>
 ```
 
-Display content in case user is unauthenticated
+##### 1.3. Display content in case user is unauthenticated
 ```html
 <ng-template isAuthenticated>
   <ng-template></ng-template> <!-- Trick: Define empty content for the right condition -->
@@ -71,8 +68,8 @@ Display content in case user is unauthenticated
 </ng-template>
 ```
 
-##### isCurrentUser
-Display content in case logger is current user
+#### 2. isCurrentUser
+##### 2.1. Display content in case logger is current user
 ```html
 <ng-template [isCurrentUser]="'vix'">
   <h1>It me ¯\_(ツ)_/¯</h1>
@@ -83,7 +80,7 @@ Or
 <h1 *isCurrentUser="'vix" >It me ¯\_(ツ)_/¯</h1>
 ```
 
-Check if logger is current user or not and then display content accordingly
+##### 2.2. Check if logger is current user or not and then display content accordingly
 ```html
 <ng-template [isCurrentUser]="'vix'">
   <h1 * >It me ¯\_(ツ)_/¯</h1> <!-- This content will be displayed if logger is current user -->
@@ -91,7 +88,7 @@ Check if logger is current user or not and then display content accordingly
 </ng-template>
 ```
 
-Display content in case current user is not logged in
+##### 2.3. Display content in case current user is not logged in
 ```html
 <ng-template [isCurrentUser]="'vix'">
   <ng-template></ng-template> <!-- Trick: Define empty content for the right condition -->
@@ -99,7 +96,7 @@ Display content in case current user is not logged in
 </ng-template>
 ```
 
-##### userRole
+#### 3. userRole
 Check & display based on user role (the same concepts with ngSwitchCase)
 ```html
 <ng-template userRole>
@@ -115,7 +112,7 @@ Or
 </ng-template>
 ```
 
-#### Services
+### Services
 Inject NgAuthenticationService into AppComponent (in case you want to use some method of this service)
 ```
 
