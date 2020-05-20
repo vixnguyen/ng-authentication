@@ -1,6 +1,6 @@
 {
-  "name": "ng-authentication",
-  "version": "0.1.4",
+  "name": "ng-auth-jwt",
+  "version": "0.1.0-beta",
   "peerDependencies": {
     "@angular/common": "^8.0.3",
     "@angular/core": "^8.0.3",
@@ -9,6 +9,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vixnguyen/ngx-gol-map.git"
+    "url": "git+https://github.com/vixnguyen/ng-authentication.git"
   }
 }

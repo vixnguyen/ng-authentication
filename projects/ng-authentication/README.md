@@ -2,7 +2,7 @@
 This package provides some utilities to deal with authentication features that are implemented based on JWT.
 
 ## Install
-Run `npm i ng-authentication`
+Run `npm i ng-auth-jwt`
 
 ## Built-in
 
