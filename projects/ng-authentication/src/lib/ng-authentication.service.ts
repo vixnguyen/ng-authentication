@@ -87,7 +87,12 @@ export class NgAuthenticationService {
 
   isCurrentUser(uid: string) {
     const userInfo = this.getUserInfo();
-    return userInfo ? uid === userInfo['uid'] : false;
+    return userInfo ? uid === userInfo.uid : false;
+  }
+
+  userRole() {
+    const userInfo = this.getUserInfo();
+    return userInfo ? userInfo.role : undefined;
   }
 
   getUserInfo() {
