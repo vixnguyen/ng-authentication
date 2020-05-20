@@ -8,8 +8,8 @@ export interface AuthModuleConfig {
   tokenGetter?: void;
   tokenName?: string;
   tokenDefault?: string;
-  authProvider?: string;
-  loginUri?: string;
+  authProvider: string;
+  loginUri: string;
 }
 export const AUTH_MODULE_CONFIG = new InjectionToken<AuthModuleConfig>('Authentication Configuration');
 

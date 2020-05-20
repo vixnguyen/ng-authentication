@@ -1,6 +1,6 @@
 {
   "name": "authentication",
-  "version": "0.0.0",
+  "version": "0.1.0-beta",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4200",
