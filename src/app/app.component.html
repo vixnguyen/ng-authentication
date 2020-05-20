@@ -2,8 +2,9 @@
   <div class="page-header">
     <!-- <h1>Welcome Guest!!!</h1> -->
     <div class="f-space-evenly">
-      <button class="btn btn-lg" [class.btn-primary]="loggedInAs == 'vinguyen.fitsgu@gmail.com'" (click)="onLogin('vinguyen.fitsgu@gmail.com')">Login as Vix Nguyen</button>
+      <button class="btn btn-lg" [class.btn-primary]="loggedInAs == 'vinguyen.fitsgu@gmail.com'" (click)="onLogin('vinguyen.fitsgu@gmail.com')">Login as Vix</button>
       <button class="btn btn-lg" [class.btn-primary]="loggedInAs == 'guest@gmail.com'" (click)="onLogin('guest@gmail.com')">Login as Anonymous</button>
+      <button class="btn btn-lg" [class.btn-primary]="loggedInAs == 'admin@gmail.com'" (click)="onLogin('admin@gmail.com')">Login as Admin</button>
       <button class="btn btn-lg" (click)="onLogout()">Logout</button>
     </div>
   </div>
@@ -21,10 +22,13 @@
           </div>
           <div class="media-action">
             <ng-template [isCurrentUser]="item.email">
-              <button * class="btn">Edit Profile</button>
+              <button * class="btn">My Profile</button>
             </ng-template>
             <ng-template isAuthenticated>
               <button class="btn" [disabled]="item.voted[loggedInAs]" (click)="onVote(item)">Vote</button>
+            </ng-template>
+            <ng-template userRole>
+              <button *userRoleIs="'admin'" class="btn" [disabled]="item.voted[loggedInAs]">Remove</button>
             </ng-template>
           </div>
         </div>

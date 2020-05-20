@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   ) {
     this.members = [
       {
-        avatar: 'https://scontent-sin6-1.xx.fbcdn.net/v/t31.0-1/cp0/p50x50/11888514_936655183067191_3140575884179561539_o.jpg?_nc_cat=100&_nc_sid=dbb9e7&_nc_ohc=2mYieZY_5FsAX_EUtZ2&_nc_ht=scontent-sin6-1.xx&oh=97c7efd9b7f845b1e44608669cf3b66b&oe=5EA66978',
+        avatar: 'https://avatars1.githubusercontent.com/u/62738404?s=400&u=b21b9975f65e94493576f52c6ecdc79b3cc64825&v=4',
         name: 'Philippe Pham',
         email: 'phillipe.pham@gmail.com',
         posts: 7,
@@ -45,7 +45,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   onLogin(uid: string) {
-    this.auth.signInWithLink({uid}).then(() => {
+    let body: any = {uid}
+    if (uid === 'admin@gmail.com') {
+      body.role = 'admin';
+    }
+    this.auth.signInWithLink(body).then(() => {
       this.loggedInAs = uid;
     });
   }

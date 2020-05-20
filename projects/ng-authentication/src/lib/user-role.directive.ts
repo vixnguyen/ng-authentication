@@ -37,7 +37,8 @@ export class UserRoleDirective implements OnInit, OnDestroy {
   }
 
   addTpl(value: any, tpl: TemplateRef<any>) {
-    if (this.auth.isAuthenticated() === value) {
+    const role = this.auth.userRole();
+    if (role && (role === value)) {
       this.viewContainer.createEmbeddedView(tpl);
     }
   }

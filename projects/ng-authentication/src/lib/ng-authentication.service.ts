@@ -92,6 +92,7 @@ export class NgAuthenticationService {
 
   userRole() {
     const userInfo = this.getUserInfo();
+    console.log(userInfo);
     return userInfo ? userInfo.role : undefined;
   }
 
