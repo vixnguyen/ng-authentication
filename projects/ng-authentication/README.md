@@ -108,6 +108,7 @@ Check & display based on user role (the same concepts with ngSwitchCase)
   </ng-template>
 </ng-template>
 ```
+Or
 ```html
 <ng-template userRole>
   <button *userRoleIs="'admin'" class="btn">Remove</button>
@@ -117,6 +118,10 @@ Check & display based on user role (the same concepts with ngSwitchCase)
 #### Services
 Inject NgAuthenticationService into AppComponent (in case you want to use some method of this service)
 ```
+
+### Services
+Inject NgAuthenticationService into AppComponent in case you want to use some methods of this service
+```TypeScript
 export class AppComponent {
 
   constructor(
