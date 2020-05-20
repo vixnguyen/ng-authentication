@@ -1,6 +1,6 @@
 {
   "name": "ng-auth-jwt",
-  "version": "0.1.0-beta",
+  "version": "0.1.0-beta.1",
   "peerDependencies": {
     "@angular/common": "^8.0.3",
     "@angular/core": "^8.0.3",

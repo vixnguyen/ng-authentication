@@ -114,10 +114,6 @@ Or
 
 ### Services
 Inject NgAuthenticationService into AppComponent (in case you want to use some method of this service)
-```
-
-### Services
-Inject NgAuthenticationService into AppComponent in case you want to use some methods of this service
 ```TypeScript
 export class AppComponent {
 
